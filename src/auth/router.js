@@ -22,7 +22,8 @@ function signUpHandler(req, res, next){
       if(!data[0]){
         userModel.create(user)
           .then(data => {
-            res.status(200).json(data);
+            req.token = data.pop();
+            res.status(200).json({User: data[0], Token: req.token});
           }).catch(next);
       }else{
         res.send('the user already exists');

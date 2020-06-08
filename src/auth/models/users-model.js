@@ -16,7 +16,9 @@ class user{
   async create(record){
     record.password =  await bcrypt.hash(record.password, 10);
     let newUser = new this.userSchema(record);
-    return newUser.save();
+    let token = this.userSchema.generateTokens(record.username);
+    
+    return [await newUser.save(),token];
   }
   
   update(record_id, record){

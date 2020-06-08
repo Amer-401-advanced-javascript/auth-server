@@ -8,9 +8,9 @@ class user{
     this.userSchema = userSchema;
   }
 
-  read(recordUserName){      
-    // let username = record.username;
-    return this.userSchema.find({username:recordUserName}); //{username: username}
+  read(username){      
+    let check = username ? {username} : {};
+    return this.userSchema.find(check); //{username: username}
   }
 
   async create(record){
@@ -20,15 +20,10 @@ class user{
   }
   
   update(record_id, record){
-
   }
 
   delete(record_id){
-
   }
 }
-
-
-
 
 module.exports = new user(userSchema);

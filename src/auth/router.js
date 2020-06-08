@@ -6,8 +6,10 @@ const userModel = require('./models/users-model');
 const basicAuth = require('./middleware/basic');
 
 
+router.get('/list', getAllHandler);
 router.post('/signup', signUpHandler);
 router.post('/signin', basicAuth, signInHandler);
+
 
 
 
@@ -28,10 +30,15 @@ function signUpHandler(req, res, next){
     }).catch(next);
 }
 
-function signInHandler(req, res, next){
-  console.log(req.token);
-    
+function signInHandler(req, res, next){    
   res.json({token:req.token, record : req.body});
+}
+
+
+function getAllHandler (req, res, next) {
+  userModel.read().then(data => {
+    res.json(data);
+  });
 }
 
 module.exports = router;

@@ -4,11 +4,13 @@ const express = require('express');
 const router = express.Router();
 const userModel = require('./models/users-model');
 const basicAuth = require('./middleware/basic');
+const oauth = require('./middleware/oauth.js');
 
 
 router.get('/list', getAllHandler);
 router.post('/signup', signUpHandler);
 router.post('/signin', basicAuth, signInHandler);
+router.get('/oauth', oauth ,oauthHandler);
 
 
 
@@ -40,6 +42,15 @@ function getAllHandler (req, res, next) {
   userModel.read().then(data => {
     res.json(data);
   });
+}
+
+function oauthHandler( req, res, next){
+  console.log('data');
+  
+  let data = req.userData;
+  console.log(data);
+  
+  res.status(200).json(data);
 }
 
 module.exports = router;

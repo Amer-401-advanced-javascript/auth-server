@@ -2,25 +2,20 @@
 
 const express = require('express');
 const app = express();
-
 const userRoute = require('./auth/router');
 
 //globalmiddleware
 //express middleware
 app.use(express.json());
+app.use(express.static('src/public'));
 //3rd Party middleware
 
 
-
+/////////////////////////////////////
 
 app.use(userRoute);
 
-
-
-
-
-
-
+//////////////////////////////////////////
 
 module.exports = {
   start: (port)=>{

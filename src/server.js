@@ -7,7 +7,7 @@ const userRoute = require('./auth/router');
 //globalmiddleware
 //express middleware
 app.use(express.json());
-app.use(express.static('src/public'));
+app.use(express.static('public'));
 //3rd Party middleware
 
 

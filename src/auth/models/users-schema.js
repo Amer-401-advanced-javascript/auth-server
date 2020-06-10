@@ -24,7 +24,7 @@ userSchema.statics.auth =  function (username, password){
 
 
 userSchema.statics.generateTokens = function( userName ){
-  let token = jwt.sign({username: userName}, 'thisShouldBeSecret');
+  let token = jwt.sign({username: userName}, 'secretToken');
   return token;
 };
 

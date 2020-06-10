@@ -33,7 +33,7 @@ function signUpHandler(req, res, next){
     }).catch(next);
 }
 
-function signInHandler(req, res, next){
+function signInHandler(req, res, next){  
   res.cookie('token', req.token);
   res.json({record : req.body});  
 }
@@ -45,7 +45,7 @@ async function getAllHandler (req, res, next) {
 }
 
 function oauthHandler( req, res, next){  
-  let data = req.userData;  
+  let data = req.userData;
   res.status(200).json(data);
 }
 

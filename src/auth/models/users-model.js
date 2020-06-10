@@ -22,23 +22,14 @@ class user{
   }
 
   async verifyToken(token){
-    let SECRET = 'thisShouldBeSecret'; //shouldbeSecret
-    // let you = jwt.verify(token, SECRET, (err , decoded)=>{
-    //   if(err){
-    //     console.log('error', err);
-    //     return Promise.reject(err); 
-    //   }else{
-    //     console.log('decoded', decoded);
-    //     let username = decoded['username'];
-    //     this.userSchema.find({username}).then(data=> {
-    //       console.log(username);
-    //       return Promise.resolve(username);
-    //     }).catch(error=> console.error(error));  
-    //   }
-    // });
-    // console.log(you, 'dhsjdhsjdhsjdhjsh');
+    let SECRET = 'secretToken'; //shouldbeSecret
+    
     try {
-      let decoded = await jwt.verify(token, SECRET);
+      //we can use callback here 
+      // like let decoded = await jwt.verify(token, SECRET, (error, decoded) =>{
+      //and here we return new Promise rejecting or resolving
+      //});
+      let decoded = await jwt.verify(token, SECRET);       
       let username = decoded.username;
       let checkUserDb = await this.userSchema.find({username});
       return checkUserDb;
@@ -46,7 +37,6 @@ class user{
       console.error(error);
     }
   }
-
 }
 
 module.exports = new user(userSchema);

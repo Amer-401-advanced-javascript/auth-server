@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "lint": "eslint '**/*.js'",
+    "test": "jest --verbose --coverage",
+    "test-watch": "jest --watchAll --verbose --coverage"
   },
   "repository": {
     "type": "git",
@@ -25,5 +28,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.18",
     "superagent": "^5.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.2.0"
   }
 }

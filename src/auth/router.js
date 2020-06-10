@@ -23,9 +23,9 @@ function signUpHandler(req, res, next){
     .then( data => {
       if(!data[0]){
         userModel.create(user)
-          .then(data => {
-            req.token = data.pop();
-            res.status(200).json({User: data[0], Token: req.token});
+          .then(data => {            
+            res.cookie('token', data.pop(), {expires: new Date(Date.now() + 900000 )});
+            res.status(200).json({User: data[0]});
           }).catch(next);
       }else{
         res.send('the user already exists');
@@ -33,23 +33,19 @@ function signUpHandler(req, res, next){
     }).catch(next);
 }
 
-function signInHandler(req, res, next){    
-  res.json({token:req.token, record : req.body});
+function signInHandler(req, res, next){
+  res.cookie('token', req.token);
+  res.json({record : req.body});  
 }
 
 
-function getAllHandler (req, res, next) {
-  userModel.read().then(data => {
-    res.json(data);
-  });
+async function getAllHandler (req, res, next) {
+  let data = await userModel.read();
+  res.json(data);
 }
 
-function oauthHandler( req, res, next){
-  console.log('data');
-  
-  let data = req.userData;
-  console.log(data);
-  
+function oauthHandler( req, res, next){  
+  let data = req.userData;  
   res.status(200).json(data);
 }
 

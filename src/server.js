@@ -3,6 +3,7 @@
 const express = require('express');
 const app = express();
 const userRoute = require('./auth/router');
+const secretRouter = require('./extra-routers');
 
 //globalmiddleware
 //express middleware
@@ -14,6 +15,7 @@ app.use(express.static('public'));
 /////////////////////////////////////
 
 app.use(userRoute);
+app.use(secretRouter);
 
 //////////////////////////////////////////
 

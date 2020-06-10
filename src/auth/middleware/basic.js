@@ -15,7 +15,7 @@ function basicAuth (req, res, next){
     bcrypt.compare(password, data[0].password).then( result =>{
       if(result){
         let secret = 'secretToken'; //this should be in the .env
-        let token = jwt.sign({username}, secret);
+        let token = jwt.sign({username}, secret, {maxAge : 900000});
         req.token = token;
         next();
       }else{

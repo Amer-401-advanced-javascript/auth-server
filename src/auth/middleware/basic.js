@@ -12,12 +12,15 @@ function basicAuth (req, res, next){
   let [username, password] = decoded.split(':'); 
   
   user.read(username).then(data =>{ 
-    bcrypt.compare(password, data[0].password).then( result =>{
+    bcrypt.compare(password, data[0].password).then(async result =>{
       if(result){
         let secret = 'secretToken'; //this should be in the .env
-        let token = jwt.sign({username}, secret);
-        req.token = token;
-        next();
+        try{         
+          let token =await jwt.sign({username},secret);
+          req.token = token;
+          next();
+        }catch(err){console.log(err);}
+        
       }else{
         res.send('invalid password');
       }
@@ -26,7 +29,6 @@ function basicAuth (req, res, next){
     });
   }).catch(err =>{
     res.send('invalid username');
-      
   });
 }
 

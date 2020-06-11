@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const userSchema = mongoose.Schema({
   username: {type: String, required: true},
   password: {type: String, required :true},
+  role: {type:String, enum: ['user', 'writer', 'editor', 'admin' ], required: true},
 });
 
 userSchema.pre('save', async ()=> {
@@ -23,9 +24,14 @@ userSchema.statics.auth =  function (username, password){
 };
 
 
-userSchema.statics.generateTokens = function( userName ){
-  let token = jwt.sign({username: userName}, 'secretToken');
-  return token;
+userSchema.statics.generateTokens =  function( record ){
+  try{
+    let token = jwt.sign({username: record.username}, 'secretToken');
+    return token;
+  }catch(err){
+    console.log(err);
+    
+  }
 };
 
 module.exports = mongoose.model('userModel', userSchema);

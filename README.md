@@ -1,4 +1,4 @@
-# LAB - Class 14
+# LAB - Class 13
 
 ## Project: auth-server
 
@@ -6,7 +6,7 @@
 
 ### Links and Resources
 
-- [submission PR](https://github.com/Amer-401-advanced-javascript/auth-server/pull/4)
+- [submission PR](https://github.com/Amer-401-advanced-javascript/auth-server/pull/3)
 <!-- - [ci/cd](http://xyz.com) (GitHub Actions) -->
 <!-- - [back-end server url](http://xyz.com) (when applicable)
 - [front-end application](http://xyz.com) (when applicable) -->

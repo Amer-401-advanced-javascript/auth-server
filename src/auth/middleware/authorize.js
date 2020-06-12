@@ -1,14 +1,16 @@
 'use strict';
 
-let jwt = require('jsonwebtoken');
 let userModel = require('../models/users-model');
 
 module.exports =  (permission)=> {
   return  (req, res, next)=>{
-    let token = req.headers.authorization.split(' ').pop();    
-    let tok = jwt.verify(token, 'secretToken');
-    userModel.readAndRole(tok)
-    
-    next();
+    let token = req.user;    
+    try{
+      let capabilities = userModel.can(token[0].role);
+      let flag = capabilities.includes(permission);
+      flag ? next() : next('access denied');
+    }catch(error){
+      console.log('error');
+    }
   };
 };

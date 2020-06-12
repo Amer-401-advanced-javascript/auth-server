@@ -7,6 +7,12 @@ const jwt = require('jsonwebtoken');
 class user{
   constructor(userSchema){
     this.userSchema = userSchema;
+    this.capabilities = {
+      admin: ['read', 'create', 'update', 'delete'],
+      editor: ['read', 'create', 'update'],
+      writer: ['read', 'write'],
+      user: ['read'],
+    };
   }
 
   read(username){      
@@ -37,19 +43,9 @@ class user{
       console.error(error);
     }
   }
-  async readAndRole(token){
-    let username = token.username;
-    let user =await this.userSchema.find({username});
-    console.log(user);
-    
-  }
-
-  set(role){
-    let user = 'read';
-    let writer = ['read', 'write'];
-    let editors = ['read', 'create', 'update'];
-    let admin = ['read', 'create', 'update', 'delete'];
-    
+  
+  can(permission){    
+    return this.capabilities[permission];
   }
 }
 

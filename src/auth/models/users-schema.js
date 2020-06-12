@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const userSchema = mongoose.Schema({
   username: {type: String, required: true},
   password: {type: String, required :true},
-  role: {type:String, enum: ['user', 'writer', 'editor', 'admin' ], required: true},
+  role: {type:String, default: 'user', enum: ['user', 'writer', 'editor', 'admin' ], required: true},
 });
 
 userSchema.pre('save', async ()=> {

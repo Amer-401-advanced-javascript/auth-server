@@ -33,8 +33,8 @@ function signUpHandler(req, res, next){
     }).catch(next);
 }
 
-function signInHandler(req, res, next){  
-  res.cookie('token', req.token);
+function signInHandler(req, res, next){    
+  res.status(201).cookie('token', req.token);
   res.json({record : req.body});  
 }
 
